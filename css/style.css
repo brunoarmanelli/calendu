@@ -1,0 +1,24 @@
+.filtro-negro {
+  background-color: black;
+  opacity: 0.8;
+}
+
+.header.masthead {
+  background-attachment: fixed !important;
+}
+header.masthead.text-center.text-white.d-flex.filtro-negro {
+    background-attachment:fixed !important;
+
+}
+
+.btn-primary {
+    background-color: red !important;
+}
+
+.text-faded {
+    color: white !important;
+}
+
+#mainNav .navbar-brand {
+    text-transform: capitalize !important;
+}
