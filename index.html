@@ -10,6 +10,41 @@
 
     <title>Calendu - O calendário do estudante</title>
 
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDiraOUULLSn41X331MbiHmrledR-uhusE",
+        authDomain: "calendu-b8259.firebaseapp.com",
+        databaseURL: "https://calendu-b8259.firebaseio.com",
+        projectId: "calendu-b8259",
+        storageBucket: "calendu-b8259.appspot.com",
+        messagingSenderId: "1069501592891"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/2.7.0/firebase-ui-auth__pt.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'logado.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>    
+
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -55,8 +90,8 @@
             <hr>
           </div>
           <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5">Organize sua vida academica. Com o Calendur nunca mais esqueça seus compromissos onde quer que esteja.</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Cadastre-se</a>
+            <p class="text-faded mb-5">Organize sua vida academica. Com o Calendu nunca mais esqueça seus compromissos onde quer que esteja.</p>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" data-toggle="modal" data-target="#conectar">Conecte-se</a>
           </div>
         </div>
       </div>
@@ -70,7 +105,7 @@
             <h2 class="section-heading text-white">Onde quer que esteja</h2>
             <hr class="light my-4">
             <p class="text-faded mb-4">Com o Calendu você podera acompanhar de perto sua vida acadêmica onde quer que esteja de forma otimizada e pratica. O Calendur é gratis e sempre será!</p>
-            <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Cadastre-se!</a>
+            <a class="btn btn-light btn-xl js-scroll-trigger" data-toggle="modal" data-target="#conectar">Cadastre-se!</a>
           </div>
         </div>
       </div>
@@ -80,7 +115,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Com o Calendur você podera</h2>
+            <h2 class="section-heading">Com o Calendu você poderá</h2>
             <hr class="my-4">
           </div>
         </div>
@@ -119,7 +154,25 @@
       </div>
     </section>
 
-   
+    <!-- Modal -->
+    <div class="modal fade" id="conectar">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Conecte-se</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div id="firebaseui-auth-container"></div>
+          </div>
+    
+        </div>
+      </div>
+    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
