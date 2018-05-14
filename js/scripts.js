@@ -11,12 +11,12 @@ firebase.initializeApp(config);
 
 
 //Checa se a autenticação foi feita e gera o template com os dados do usuario.
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     var uid = user.uid;
     var boxTemplate = $("#template").html();
     var compiledBoxTemplate = Handlebars.compile(boxTemplate);
-    var dbRef = firebase.database().ref().child('users/'+uid+'/');
+    var dbRef = firebase.database().ref().child('users/' + uid + '/');
     dbRef.on('value', function (snap) {
       //Se existir dados para o usuario no banco de dados, gera o template.
       if (snap.val()) {
@@ -53,8 +53,8 @@ var salvarDisciplina = function (a) {
     "eventos": "",
     "chave": ""
   }
-  var chave = database.child('users/'+usuario.uid+'/disciplinas/').push(dados).key;
-  firebase.database().ref('users/'+usuario.uid+'/disciplinas/'+chave).child('chave').set(chave);
+  var chave = database.child('users/' + usuario.uid + '/disciplinas/').push(dados).key;
+  firebase.database().ref('users/' + usuario.uid + '/disciplinas/' + chave).child('chave').set(chave);
   $("#novaDiscForm")[0].reset();
   $('#addDisc').modal('hide');
 };
@@ -74,12 +74,16 @@ var salvarProva = function (a) {
   a.preventDefault();
   var usuario = firebase.auth().currentUser;
   var dataProva = $('#dataProva').val();
+  dataProva += " GMT-0300"
+  var dataObj = new Date(dataProva);
+  var options = { month: 'long', day: 'numeric' };
+  var dataLocal = dataObj.toLocaleString('pt-BR', options);
   var horaProva = $('#horaProva').val();
   var dadosProva = {
-    "data": dataProva,
+    "data": dataLocal,
     "horario": horaProva
   }
-  database.child('users/'+usuario.uid+'/disciplinas/'+chaveDisciplina+'/provas/').push(dadosProva);
+  database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/provas/').push(dadosProva);
   $("#novaProvaForm")[0].reset();
   $('#addProva').modal('hide');
 };
@@ -100,7 +104,7 @@ var salvarTrabalho = function (a) {
     "data": dataTrabalho,
     "horario": horaTrabalho
   }
-  database.child('users/'+usuario.uid+'/disciplinas/'+chaveDisciplina+'/trabalhos/').push(dadosTrabalho);
+  database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/trabalhos/').push(dadosTrabalho);
   $("#novoTrabalhoForm")[0].reset();
   $('#addTrabalho').modal('hide');
 };
@@ -121,7 +125,7 @@ var salvarExercicio = function (a) {
     "data": dataExercicio,
     "horario": horaExercicio
   }
-  database.child('users/'+usuario.uid+'/disciplinas/'+chaveDisciplina+'/exercicios/').push(dadosExercicio);
+  database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/exercicios/').push(dadosExercicio);
   $("#novoExercicioForm")[0].reset();
   $('#addExercicio').modal('hide');
 };
@@ -129,12 +133,12 @@ $(document).on('submit', '#novoExercicioForm', salvarExercicio);
 
 
 //Remover Disciplina
-var removerDisciplina = function(b){
+var removerDisciplina = function (b) {
   b.preventDefault();
   var usuario = firebase.auth().currentUser;
   var key = $(this).data('key');
-  if(confirm('Deseja excluir a disciplina? Esta ação não pode ser desfeita.')){
-    firebase.database().ref('users/'+usuario.uid+'/disciplinas/').child(key).remove();
+  if (confirm('Deseja excluir a disciplina? Esta ação não pode ser desfeita.')) {
+    firebase.database().ref('users/' + usuario.uid + '/disciplinas/').child(key).remove();
   }
 }
 $(document).on('click', '.remover-disciplina', removerDisciplina);
@@ -142,9 +146,9 @@ $(document).on('click', '.remover-disciplina', removerDisciplina);
 
 //Logout de Usuario
 function logout_user() {
-  firebase.auth().signOut().then(function() {
+  firebase.auth().signOut().then(function () {
     window.location = 'index.html';
-  }).catch(function(error) {
+  }).catch(function (error) {
     console.log("Erro");
   });
 }
