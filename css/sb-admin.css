@@ -198,3 +198,61 @@ footer.sticky-footer {
   background-color: #e9ecef;
   line-height: 55px;
 }
+
+
+body#page-top{
+ background-image: url(https://cdn.dribbble.com/users/136211/screenshots/2008336/bg-pattern-blue-sm_1x.png) !important;
+}
+
+button.btn.btn-primary {
+    color: #fff;
+    background-color: #0c5460;
+    border-color: #0c5460;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+button.btn-primary:hover {
+    color: #0c5460;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+body.sticky-footer .content-wrapper {
+  width:90%;
+  float:right;
+}
+
+a.nav-link {
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+button.btn.btn-primary {
+  margin-right: 30px
+}
+
+#mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
+  font-size:12px;
+}
+
+.nav-link:hover {
+  color:white !important;
+}
+
+.card {
+    margin-bottom: 20px;
+    background-color: rgba(0,123,255,.5);
+}
+
+.card-header .btn-link{
+      color: #f8f9fa;
+    text-decoration: none;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 27px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
