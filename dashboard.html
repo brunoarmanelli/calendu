@@ -35,7 +35,7 @@
       </ul>
     </div>
   </nav>
-  
+
   <!-- Modal Adicionar Disciplina -->
   <div class="modal" id="addDisc" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -186,11 +186,11 @@
                           </div>
                         </div>
                         <a id="target" class="card-footer text-white clearfix small z-1" href="#">
-                          <div class="esconde">
-                            {{#each provas}}
-                              {{data}}&nbsp;-&nbsp;{{horario}}<br>
-                            {{/each}}
-                          </div>
+                            <div class="esconde">
+                                {{#eachSort provas}}
+                                  {{data}}<br>
+                                {{/eachSort}}
+                            </div>
                           <span class="float-left">Ver Detalhes</span>
                           <span class="float-right">
                             <i class="fa fa-angle-right"></i>

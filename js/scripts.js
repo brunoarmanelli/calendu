@@ -9,6 +9,36 @@ var config = {
 };
 firebase.initializeApp(config);
 
+//Helper criado para o handlebars que ordena as datas no momento de escrevê-las.
+Handlebars.registerHelper('eachSort', function (obj, options) {
+  var dados = [];
+  var result = '';
+
+  //Itera sobre o objeto contendo os dados de cada prova e cria um vetor com esses dados.
+  for (var key in obj) {
+    dados.push({
+      'data': obj[key].data,
+    });
+  }
+
+  //Ordena o vetor em ordem crescente
+  dados.sort(function (a, b) {
+    return a.data - b.data;
+  });
+
+  //Converte as datas de milissegundos para o formato adequado e gera o template.
+  for (var i = 0; i < dados.length; i++) {
+    var miliseg = dados[i].data;
+    var dataStr = new Date(miliseg);
+    var opcoes = { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    var dataLocal = dataStr.toLocaleString('pt-BR', opcoes);
+    dados[i].data = dataLocal;
+    result += options.fn(dados[i]);
+    
+  }
+
+  return result;
+});
 
 //Checa se a autenticação foi feita e gera o template com os dados do usuario.
 firebase.auth().onAuthStateChanged(function (user) {
@@ -74,14 +104,12 @@ var salvarProva = function (a) {
   a.preventDefault();
   var usuario = firebase.auth().currentUser;
   var dataProva = $('#dataProva').val();
-  dataProva += " GMT-0300"
-  var dataObj = new Date(dataProva);
-  var options = { month: 'long', day: 'numeric' };
-  var dataLocal = dataObj.toLocaleString('pt-BR', options);
   var horaProva = $('#horaProva').val();
+  var dataHora = dataProva + 'T' + horaProva;
+  var dataObj = new Date(dataHora);
+  var dataHoraFormat = Date.parse(dataObj);
   var dadosProva = {
-    "data": dataLocal,
-    "horario": horaProva
+    "data": dataHoraFormat
   }
   database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/provas/').push(dadosProva);
   $("#novaProvaForm")[0].reset();
