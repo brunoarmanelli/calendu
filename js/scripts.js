@@ -58,7 +58,7 @@ firebase.auth().onAuthStateChanged(function (user) {
       //Caso contrário, cria uma entrada para o usuário no banco de dados.
       else {
         firebase.database().ref('users').child(uid).set('0');
-        firebase.database().ref('users').child(uid).child('disciplinas').set('0');
+        firebase.database().ref('users').child(uid).child('disciplinas').set('');
       }
     });
   }

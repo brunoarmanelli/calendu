@@ -43,6 +43,7 @@
         <div class="col-sm-12 col-md-8" id="accordion">
           <!-- Template -->
           <script id="template" type="text/x-handlebars-template">
+            {{#if disciplinas}}
             {{#each disciplinas}}
               <div class="card">
                 <div class="card-header" id="heading{{@index}}">
@@ -123,6 +124,12 @@
                 </div>
               </div>
               {{/each}}
+
+              <!--Se não existir nenhuma disciplina cadastrada, gera o código abaixo-->
+              {{else}}
+              <h3>Nenhuma disciplina cadastrada</h3>
+              <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDisc">Adicionar Disciplina</button></div>
+              {{/if}}
           </script>
         </div>
 
