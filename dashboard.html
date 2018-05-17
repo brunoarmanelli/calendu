@@ -135,7 +135,7 @@
               <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDisc">Adicionar Disciplina</button></div>
               {{/if}}
           </script>
-          
+
         </div>
 
         <!--Calendário-->
@@ -149,7 +149,10 @@
                 {{#if disciplinas}}
                 {{#each disciplinas}}
                   <h5>{{nome}}</h5>
-                  <h6>Provas</h6>
+                  {{#each dias}}
+                    &bull;&nbsp;{{this}}
+                  {{/each}}
+                  <h6><br>Provas</h6>
                   {{#if provas}}
                   {{#eachSort provas}}
                     <li class="card-text">{{data}}</li>
@@ -194,7 +197,22 @@
                 </div>
                 <div class="form-group">
                   <label for="diaSemana">Dias da Semana</label>
-                  <input type="text" class="form-control" id="diaSemana" placeholder="Dias da Semana" required>
+                  <div class="weekDays-selector">
+                    <input type="checkbox" id="weekday-mon" class="weekday" />
+                    <label for="weekday-mon">Seg</label>
+                    <input type="checkbox" id="weekday-tue" class="weekday" />
+                    <label for="weekday-tue">Ter</label>
+                    <input type="checkbox" id="weekday-wed" class="weekday" />
+                    <label for="weekday-wed">Qua</label>
+                    <input type="checkbox" id="weekday-thu" class="weekday" />
+                    <label for="weekday-thu">Qui</label>
+                    <input type="checkbox" id="weekday-fri" class="weekday" />
+                    <label for="weekday-fri">Sex</label>
+                    <input type="checkbox" id="weekday-sat" class="weekday" />
+                    <label for="weekday-sat">Sab</label>
+                    <input type="checkbox" id="weekday-sun" class="weekday" />
+                    <label for="weekday-sun">Dom</label>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="horario">Horário</label>
@@ -294,7 +312,7 @@
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    
+
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/2.7.0/firebase-ui-auth__pt.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>

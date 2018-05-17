@@ -35,7 +35,7 @@ Handlebars.registerHelper('eachSort', function (obj, options) {
     var dataLocal = dataStr.toLocaleString('pt-BR', opcoes);
     dados[i].data = dataLocal;
     result += options.fn(dados[i]);
-    
+
   }
 
   return result;
@@ -75,7 +75,56 @@ var salvarDisciplina = function (a) {
   a.preventDefault();
   var usuario = firebase.auth().currentUser;
   var nomeDisc = $('#nomeDisc').val();
-  var diaSemana = $('#diaSemana').val();
+  var diaSemana = [];
+  if ($('#weekday-mon').is(":checked")) {
+    diaSemana.push(1);
+  }
+  if ($('#weekday-tue').is(":checked")) {
+    diaSemana.push(2);
+  }
+  if ($('#weekday-wed').is(":checked")) {
+    diaSemana.push(3);
+  }
+  if ($('#weekday-thu').is(":checked")) {
+    diaSemana.push(4);
+  }
+  if ($('#weekday-fri').is(":checked")) {
+    diaSemana.push(5);
+  }
+  if ($('#weekday-sat').is(":checked")) {
+    diaSemana.push(6);
+  }
+  if ($('#weekday-sun').is(":checked")) {
+    diaSemana.push(0);
+  }
+  function ordenarCrescente(a, b) {
+    return a - b;
+  }
+  diaSemana.sort(ordenarCrescente);
+
+  for (var i = 0; i < diaSemana.length; i++) {
+    if (diaSemana[i] == 0) {
+      diaSemana[i] = "Domingo";
+    }
+    else if (diaSemana[i] == 1) {
+      diaSemana[i] = "Segunda";
+    }
+    else if (diaSemana[i] == 2) {
+      diaSemana[i] = "Terça";
+    }
+    else if (diaSemana[i] == 3) {
+      diaSemana[i] = "Quarta";
+    }
+    else if (diaSemana[i] == 4) {
+      diaSemana[i] = "Quinta";
+    }
+    else if (diaSemana[i] == 5) {
+      diaSemana[i] = "Sexta";
+    }
+    else if (diaSemana[i] == 6) {
+      diaSemana[i] = "Sábado";
+    }
+  }
   var horario = $('#horario').val();
   var dados = {
     "nome": nomeDisc,
