@@ -46,9 +46,9 @@
             {{#if disciplinas}}
             {{#each disciplinas}}
               <div class="card">
-                <div class="card-header" id="heading{{@index}}">
+                <div class="card-header" id="heading{{@index}}" data-toggle="collapse" data-target="#collapse{{@index}}" >
                   <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{@index}}" aria-expanded="true" aria-controls="collapse{{@index}}">
+                    <button class="btn btn-link" aria-expanded="true" aria-controls="collapse{{@index}}">
                       {{nome}}
                     </button>
                   </h5>
@@ -131,8 +131,12 @@
               {{/each}}
               <!--Se não existir nenhuma disciplina cadastrada, gera o código abaixo-->
               {{else}}
-              <h3>Nenhuma disciplina cadastrada</h3>
-              <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDisc">Adicionar Disciplina</button></div>
+              <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Nenhuma disciplina cadastrada</h4>
+                <p>Para aproveitar os recursos do Calendu, você deve adicionar uma disciplina.</p>
+                <hr>
+                <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDisc">Adicionar Disciplina</button></div>
+              </div>              
               {{/if}}
           </script>
 
@@ -160,6 +164,7 @@
                   {{else}}
                   <li>Nenhuma prova cadastrada</li>
                   {{/if}}
+                  <br>
                   <h6>Tarefas</h6>
                   {{#if trabalhos}}
                   {{#eachSort trabalhos}}
