@@ -45,12 +45,15 @@ firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     var uid = user.uid;
     var boxTemplate = $("#template").html();
+    var calenTemplate = $("#template-calendario").html();
     var compiledBoxTemplate = Handlebars.compile(boxTemplate);
+    var compiledCalenTemplate = Handlebars.compile(calenTemplate);
     var dbRef = firebase.database().ref().child('users/' + uid + '/');
     dbRef.on('value', function (snap) {
       //Se existir dados para o usuario no banco de dados, gera o template.
       if (snap.val()) {
         $("#accordion").html(compiledBoxTemplate(snap.val()));
+        $('#container-calendario').html(compiledCalenTemplate(snap.val()));
       }
       //Caso contrário, cria uma entrada para o usuário no banco de dados.
       else {
@@ -128,9 +131,11 @@ var salvarTrabalho = function (a) {
   var usuario = firebase.auth().currentUser;
   var dataTrabalho = $('#dataTrabalho').val();
   var horaTrabalho = $('#horaTrabalho').val();
+  var dataHora = dataTrabalho + 'T' + horaTrabalho;
+  var dataObj = new Date(dataHora);
+  var dataHoraFormat = Date.parse(dataObj);
   var dadosTrabalho = {
-    "data": dataTrabalho,
-    "horario": horaTrabalho
+    "data": dataHoraFormat
   }
   database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/trabalhos/').push(dadosTrabalho);
   $("#novoTrabalhoForm")[0].reset();

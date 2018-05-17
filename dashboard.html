@@ -73,22 +73,18 @@
                             </div>
                           </div>
                           <a id="target" class="card-footer text-white clearfix small z-1" href="#">
-
-
                               <div class="esconde">
                                   {{#eachSort provas}}
                                   <div class="row">
                                       <div class="col-sm-10">
                                         <li>{{data}}</li>
-
                                       </div>
                                       <div class="col-sm-2">
                                           <i class="fa fa-trash-o"></i>
                                       </div>
-
                                       <br>
+                                    </div>
                                     {{/eachSort}}
-                                  </div>
                               </div>
                             <span class="float-left">Ver Detalhes</span>
                             <span class="float-right">
@@ -111,9 +107,9 @@
                         </div>
                           <a id="target" class="card-footer text-white clearfix small z-1" href="#">
                             <div class="esconde">
-                              {{#each trabalhos}}
-                                {{data}}&nbsp;-&nbsp;{{horario}}<br>
-                              {{/each}}
+                              {{#eachSort trabalhos}}
+                                {{data}}<br>
+                              {{/eachSort}}
                             </div>
                             <span class="float-left">Ver Detalhes</span>
                             <span class="float-right">
@@ -132,14 +128,34 @@
 
         <div class="col-sm-12 col-md-4" id="calendar">
           <div class="card bg-danger text-white">
-              <div class="card-header">
-                  <h2 class="card-title">Calendário</h2>
-              </div>
-              <div class="card-body">
-                <h5>16 de Maio</h5>
-                <p class="card-text" style"margin-left:5em">19:00 - Prova de AED II</p>
-              </div>
+            <div class="card-header">
+              <h2 class="card-title">Calendário</h2>
             </div>
+            <div class="card-body" id="container-calendario">
+              <script id="template-calendario" type="text/x-handlebars-template">
+                {{#each disciplinas}}
+                  <h5>{{nome}}</h5>
+                  <h6>Provas</h6>
+                  {{#if provas}}
+                  {{#eachSort provas}}
+                    <li class="card-text">{{data}}</li>
+                  {{/eachSort}}
+                  {{else}}
+                  <li>Nenhuma prova cadastrada</li>
+                  {{/if}}
+                  <h6>Tarefas</h6>
+                  {{#if trabalhos}}
+                  {{#eachSort trabalhos}}
+                    <li class="card-text">{{data}}</li>
+                  {{/eachSort}}
+                  {{else}}
+                  <li>Nenhuma tarefa cadastrada</li>
+                  {{/if}}
+                  <br>
+                {{/each}}
+              </script>
+            </div>
+          </div>
         </div>
       </div>
 
