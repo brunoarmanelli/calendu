@@ -10,7 +10,7 @@ body#page-top{
 
 .card {
   margin-bottom: 20px;
-  background-color: rgb(0, 0, 0); /* troca a cor das disciplinas */
+  background-color: rgba(0, 0, 0, 0.3); /* troca a cor das disciplinas */
 }
 
 .bg-dark {
