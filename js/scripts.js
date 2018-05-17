@@ -132,7 +132,6 @@ var salvarDisciplina = function (a) {
     "horario": horario,
     "provas": "",
     "trabalhos": "",
-    "exercicios": "",
     "eventos": "",
     "chave": ""
   }
@@ -167,6 +166,7 @@ var salvarProva = function (a) {
   database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/provas/').push(dadosProva);
   $("#novaProvaForm")[0].reset();
   $('#addProva').modal('hide');
+  
 };
 $(document).on('submit', '#novaProvaForm', salvarProva);
 
@@ -194,27 +194,6 @@ var salvarTrabalho = function (a) {
 $(document).on('submit', '#novoTrabalhoForm', salvarTrabalho);
 
 
-//Salvar novo exercício
-function getKey() {
-  chaveDisciplina = $(this).data('key');
-}
-$(document).on('click', '#adicionar-exercicio', getKey);
-var salvarExercicio = function (a) {
-  a.preventDefault();
-  var usuario = firebase.auth().currentUser;
-  var dataExercicio = $('#dataExercicio').val();
-  var horaExercicio = $('#horaExercicio').val();
-  var dadosExercicio = {
-    "data": dataExercicio,
-    "horario": horaExercicio
-  }
-  database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/exercicios/').push(dadosExercicio);
-  $("#novoExercicioForm")[0].reset();
-  $('#addExercicio').modal('hide');
-};
-$(document).on('submit', '#novoExercicioForm', salvarExercicio);
-
-
 //Remover Disciplina
 var removerDisciplina = function (b) {
   b.preventDefault();
@@ -225,6 +204,32 @@ var removerDisciplina = function (b) {
   }
 }
 $(document).on('click', '.remover-disciplina', removerDisciplina);
+
+//Remover Prova
+var removerProva = function (b) {
+  b.preventDefault();
+  var usuario = firebase.auth().currentUser;
+  var keyDisc = $(this).closest('#footer-prova').data('key');
+  var keyProva = $(this).data('key');
+  if (confirm('Deseja excluir a prova? Esta ação não pode ser desfeita.')) {
+    firebase.database().ref('users/' + usuario.uid + '/disciplinas/' + keyDisc + '/provas/' ).child(keyProva).remove();
+  }
+  
+}
+$(document).on('click', '#remover-prova', removerProva);
+
+//Remover Tarefa
+var removerTarefa = function (b) {
+  b.preventDefault();
+  var usuario = firebase.auth().currentUser;
+  var keyDisc = $(this).closest('#footer-trabalho').data('key');
+  var keyTrabalho = $(this).data('key');
+  if (confirm('Deseja excluir a tarefa? Esta ação não pode ser desfeita.')) {
+    firebase.database().ref('users/' + usuario.uid + '/disciplinas/' + keyDisc + '/trabalhos/' ).child(keyTrabalho).remove();
+  }
+  
+}
+$(document).on('click', '#remover-trabalho', removerTarefa);
 
 
 //Logout de Usuario
