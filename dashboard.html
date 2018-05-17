@@ -124,7 +124,6 @@
                 </div>
               </div>
               {{/each}}
-
               <!--Se não existir nenhuma disciplina cadastrada, gera o código abaixo-->
               {{else}}
               <h3>Nenhuma disciplina cadastrada</h3>
@@ -133,6 +132,7 @@
           </script>
         </div>
 
+        <!--Calendário-->
         <div class="col-sm-12 col-md-4" id="calendar">
           <div class="card bg-danger text-white">
             <div class="card-header">
@@ -140,6 +140,7 @@
             </div>
             <div class="card-body" id="container-calendario">
               <script id="template-calendario" type="text/x-handlebars-template">
+                {{#if disciplinas}}
                 {{#each disciplinas}}
                   <h5>{{nome}}</h5>
                   <h6>Provas</h6>
@@ -160,6 +161,9 @@
                   {{/if}}
                   <br>
                 {{/each}}
+                {{else}}
+                <li>Nenhuma disciplina cadastrada</li>
+                {{/if}}
               </script>
             </div>
           </div>

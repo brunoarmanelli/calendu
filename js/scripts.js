@@ -18,6 +18,7 @@ Handlebars.registerHelper('eachSort', function (obj, options) {
   for (var key in obj) {
     dados.push({
       'data': obj[key].data,
+      'chave': key
     });
   }
 
