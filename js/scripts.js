@@ -37,7 +37,6 @@ Handlebars.registerHelper('eachSort', function (obj, options) {
     result += options.fn(dados[i]);
 
   }
-
   return result;
 });
 
@@ -64,6 +63,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     });
   }
   else {
+    //Se o usuário não estiver logado, redireciona para a página inicial.
     window.location = 'index.html';
   }
 });
@@ -76,6 +76,8 @@ var salvarDisciplina = function (a) {
   var usuario = firebase.auth().currentUser;
   var nomeDisc = $('#nomeDisc').val();
   var diaSemana = [];
+  
+  //Checa quais checkboxes de dias da semana estão marcados e salva um valor no vetor.
   if ($('#weekday-mon').is(":checked")) {
     diaSemana.push(1);
   }
@@ -97,11 +99,14 @@ var salvarDisciplina = function (a) {
   if ($('#weekday-sun').is(":checked")) {
     diaSemana.push(0);
   }
+
+  //Ordena o vetor em ordem crescente
   function ordenarCrescente(a, b) {
     return a - b;
   }
   diaSemana.sort(ordenarCrescente);
 
+  //Itera sobre cada elemento do vetor e salva o dia da semana correspondente ao número salvo no vetor.
   for (var i = 0; i < diaSemana.length; i++) {
     if (diaSemana[i] == 0) {
       diaSemana[i] = "Domingo";
@@ -135,8 +140,11 @@ var salvarDisciplina = function (a) {
     "eventos": "",
     "chave": ""
   }
+  //Salva os dados da disciplina no firebase
   var chave = database.child('users/' + usuario.uid + '/disciplinas/').push(dados).key;
   firebase.database().ref('users/' + usuario.uid + '/disciplinas/' + chave).child('chave').set(chave);
+  
+  //Reseta os campos do formulário e fecha o modal do formulário
   $("#novaDiscForm")[0].reset();
   $('#addDisc').modal('hide');
 };
@@ -148,15 +156,18 @@ $(document).ready(function () {
 //Salvar nova prova
 var database = firebase.database().ref();
 var chaveDisciplina;
+//Pega o valor da chave correspondente à disciplina
 function getKey() {
   chaveDisciplina = $(this).data('key');
 }
 $(document).on('click', '#adicionar-prova', getKey);
+//Função que salva os dados das provas no banco de dados.
 var salvarProva = function (a) {
   a.preventDefault();
   var usuario = firebase.auth().currentUser;
   var dataProva = $('#dataProva').val();
   var horaProva = $('#horaProva').val();
+  //Concatena as strings relacionadas à data e horario da prova, cria um objeto Date e converte os dados para milissegundos.
   var dataHora = dataProva + 'T' + horaProva;
   var dataObj = new Date(dataHora);
   var dataHoraFormat = Date.parse(dataObj);
@@ -181,8 +192,11 @@ var salvarTrabalho = function (a) {
   var usuario = firebase.auth().currentUser;
   var dataTrabalho = $('#dataTrabalho').val();
   var horaTrabalho = $('#horaTrabalho').val();
+  //Concatena as strings relacionadas à data e horario do trabalho
   var dataHora = dataTrabalho + 'T' + horaTrabalho;
+  //Gera um objeto Date
   var dataObj = new Date(dataHora);
+  //Converte a string de data para timestamp em milissegundo
   var dataHoraFormat = Date.parse(dataObj);
   var dadosTrabalho = {
     "data": dataHoraFormat
@@ -205,6 +219,7 @@ var removerDisciplina = function (b) {
 }
 $(document).on('click', '.remover-disciplina', removerDisciplina);
 
+
 //Remover Prova
 var removerProva = function (b) {
   b.preventDefault();
@@ -217,6 +232,7 @@ var removerProva = function (b) {
   
 }
 $(document).on('click', '#remover-prova', removerProva);
+
 
 //Remover Tarefa
 var removerTarefa = function (b) {
