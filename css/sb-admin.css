@@ -199,11 +199,6 @@ footer.sticky-footer {
   line-height: 55px;
 }
 
-
-body#page-top{
- background-image: url(https://cdn.dribbble.com/users/136211/screenshots/2008336/bg-pattern-blue-sm_1x.png) !important;
-}
-
 button.btn.btn-primary {
     color: #fff;
     background-color: #0c5460;
@@ -242,10 +237,7 @@ button.btn.btn-primary {
   color:white !important;
 }
 
-.card {
-    margin-bottom: 20px;
-    background-color: rgba(0,123,255,.5);
-}
+
 
 .card-header .btn-link{
       color: #f8f9fa;

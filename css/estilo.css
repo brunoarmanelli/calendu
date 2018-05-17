@@ -1,6 +1,16 @@
-.background-app{
+
+body#page-top{
   background-image: url("../img/fundo.png") !important;
-  background-repeat: repeat;
+ }
+ 
+.background-app {
+  background-image: url("../img/fundo.jpg") !important; /* troca o background */
+  background-repeat: repeat; 
+}
+
+.card {
+  margin-bottom: 20px;
+  background-color: rgb(0, 0, 0); /* troca a cor das disciplinas */
 }
 
 .bg-dark {
@@ -16,10 +26,12 @@
 }
 
 .remover-disciplina {
-  color: black;
 }
 
 #target {
   text-decoration: none;
 }
 
+.conteudo-body {
+  padding-top: 1rem;
+}

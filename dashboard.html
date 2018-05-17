@@ -37,7 +37,7 @@
     </div>
   </nav>
 
-  <div class="content-wrapper">
+  <div class="conteudo-body">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 col-md-8" id="accordion">
@@ -51,12 +51,9 @@
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{@index}}" aria-expanded="true" aria-controls="collapse{{@index}}">
                       {{nome}}
                     </button>
-                    <!--Ajustar Alinhamento-->
-                    <a class="remover-disciplina" href="#" data-key="{{@key}}">
-                        <i class="fa fa-trash-o" style="float: right;"></i>
-                    </a>
                   </h5>
                 </div>
+
                 <div id="collapse{{@index}}" class="collapse hide" aria-labelledby="heading{{@index}}" data-parent="#accordion">
                   <div class="card-body">
                     <!-- Cards -->
@@ -119,7 +116,15 @@
                           </a>
                         </div>
                       </div>
+
+
                     </div>
+                    <div class="text-right">
+
+                      <button type="button" class="btn btn-outline-danger btn-sm remover-disciplina" data-key="{{@key}}"><i class="fa fa-trash-o"></i></button>
+                      
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -130,11 +135,12 @@
               <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDisc">Adicionar Disciplina</button></div>
               {{/if}}
           </script>
+          
         </div>
 
         <!--Calendário-->
         <div class="col-sm-12 col-md-4" id="calendar">
-          <div class="card bg-danger text-white">
+          <div class="card bg-light mb-3">
             <div class="card-header">
               <h2 class="card-title">Calendário</h2>
             </div>
@@ -288,14 +294,7 @@
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Calendu 2018</small>
-        </div>
-      </div>
-    </footer>
-
+    
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/2.7.0/firebase-ui-auth__pt.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
