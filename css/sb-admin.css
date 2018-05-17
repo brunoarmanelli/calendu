@@ -248,3 +248,8 @@ button.btn.btn-primary {
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.card-header:first-child:hover {
+  background-color: rgba(0,0,0,.09);
+  transform: scale(1.01);
+}
