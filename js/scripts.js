@@ -89,62 +89,96 @@ var salvarDisciplina = function (a) {
   
   //Checa quais checkboxes de dias da semana estão marcados e salva um valor no vetor.
   if ($('#weekday-mon').is(":checked")) {
-    diaSemana.push(1);
+    diaSemana.push({
+      'dia': 1,
+      'inicio': $('#inputInicioSegunda').val(),
+      'fim': $('#inputFimSegunda').val()
+    });
+    $('#containerHoraSegunda').remove();
   }
   if ($('#weekday-tue').is(":checked")) {
-    diaSemana.push(2);
+    diaSemana.push({
+      'dia': 2,
+      'inicio': $('#inputInicioTerça').val(),
+      'fim': $('#inputFimTerça').val()
+    });
+    $('#containerHoraTerça').remove();
   }
   if ($('#weekday-wed').is(":checked")) {
-    diaSemana.push(3);
+    diaSemana.push({
+      'dia': 3,
+      'inicio': $('#inputInicioQuarta').val(),
+      'fim': $('#inputFimQuarta').val()
+    });
+    $('#containerHoraQuarta').remove();
   }
   if ($('#weekday-thu').is(":checked")) {
-    diaSemana.push(4);
+    diaSemana.push({
+      'dia': 4,
+      'inicio': $('#inputInicioQuinta').val(),
+      'fim': $('#inputFimQuinta').val()
+    });
+    $('#containerHoraQuinta').remove();
   }
   if ($('#weekday-fri').is(":checked")) {
-    diaSemana.push(5);
+    diaSemana.push({
+      'dia': 5,
+      'inicio': $('#inputInicioSexta').val(),
+      'fim': $('#inputFimSexta').val()
+    });
+    $('#containerHoraSexta').remove();
   }
   if ($('#weekday-sat').is(":checked")) {
-    diaSemana.push(6);
+    diaSemana.push({
+      'dia': 6,
+      'inicio': $('#inputInicioSábado').val(),
+      'fim': $('#inputFimSábado').val()
+    });
+    $('#containerHoraSábado').remove();
   }
   if ($('#weekday-sun').is(":checked")) {
-    diaSemana.push(0);
+    diaSemana.push({
+      'dia': 0,
+      'inicio': $('#inputInicioDomingo').val(),
+      'fim': $('#inputFimDomingo').val()
+    });
+    $('#containerHoraDomingo').remove();
   }
 
   //Ordena o vetor em ordem crescente
   function ordenarCrescente(a, b) {
-    return a - b;
+    return a.dia - b.dia;
   }
   diaSemana.sort(ordenarCrescente);
 
   //Itera sobre cada elemento do vetor e salva o dia da semana correspondente ao número salvo no vetor.
   for (var i = 0; i < diaSemana.length; i++) {
-    if (diaSemana[i] == 0) {
-      diaSemana[i] = "Domingo";
+    if (diaSemana[i].dia == 0) {
+      diaSemana[i].dia = "Domingo";
     }
-    else if (diaSemana[i] == 1) {
-      diaSemana[i] = "Segunda";
+    else if (diaSemana[i].dia == 1) {
+      diaSemana[i].dia = "Segunda";
     }
-    else if (diaSemana[i] == 2) {
-      diaSemana[i] = "Terça";
+    else if (diaSemana[i].dia == 2) {
+      diaSemana[i].dia = "Terça";
     }
-    else if (diaSemana[i] == 3) {
-      diaSemana[i] = "Quarta";
+    else if (diaSemana[i].dia == 3) {
+      diaSemana[i].dia = "Quarta";
     }
-    else if (diaSemana[i] == 4) {
-      diaSemana[i] = "Quinta";
+    else if (diaSemana[i].dia == 4) {
+      diaSemana[i].dia = "Quinta";
     }
-    else if (diaSemana[i] == 5) {
-      diaSemana[i] = "Sexta";
+    else if (diaSemana[i].dia == 5) {
+      diaSemana[i].dia = "Sexta";
     }
-    else if (diaSemana[i] == 6) {
-      diaSemana[i] = "Sábado";
+    else if (diaSemana[i].dia == 6) {
+      diaSemana[i].dia = "Sábado";
     }
   }
 
   var dados = {
     "nome": nomeDisc,
     "dias": diaSemana,
-    "horario": "",
     "provas": "",
     "trabalhos": "",
     "eventos": "",

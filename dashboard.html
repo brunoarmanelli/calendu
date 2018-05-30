@@ -155,7 +155,7 @@
                 {{#each disciplinas}}
                   <h5>{{nome}}</h5>
                   {{#each dias}}
-                    &bull;&nbsp;{{this}}
+                    &bull;&nbsp;{{this.dia}}: {{this.inicio}} às {{this.fim}}
                   {{/each}}
                   <h6><br>Provas</h6>
                   {{#if provas}}
