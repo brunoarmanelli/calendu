@@ -68,6 +68,16 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 
+//Cria inputs de horário de início e fim para cada dia da semana selecionado no formulário de adicionar disciplina
+var wrapper = $("#horarioDiaSemana");
+$(".weekday").change( function(){
+    if($(this).is(':checked')){
+        $(wrapper).append('<div id="containerHora'+this.name+'"style="margin-bottom: 10px">'+'<label for="horario" class="horario'+this.name+'">'+this.name+'</label>'+'<br>Início: <input type="time" class="horario' +this.name+ '" id="inputInicio'+this.name+'" required>' + '&nbspFim: <input type="time" class="horario' +this.name+ '" id="inputFim'+this.name+'" required><hr></div>');
+    }
+    else{
+        $('#containerHora'+this.name).remove();
+    }
+});
 
 //Salvar nova disciplina
 var database = firebase.database().ref();
@@ -130,11 +140,11 @@ var salvarDisciplina = function (a) {
       diaSemana[i] = "Sábado";
     }
   }
-  var horario = $('#horario').val();
+
   var dados = {
     "nome": nomeDisc,
     "dias": diaSemana,
-    "horario": horario,
+    "horario": "",
     "provas": "",
     "trabalhos": "",
     "eventos": "",
