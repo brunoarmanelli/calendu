@@ -18,7 +18,9 @@ Handlebars.registerHelper('eachSort', function (obj, options) {
   for (var key in obj) {
     dados.push({
       'data': obj[key].data,
+      'detalhes': obj[key].detalhes,
       'chave': key
+
     });
   }
 
@@ -215,8 +217,10 @@ var salvarProva = function (a) {
   var dataHora = dataProva + 'T' + horaProva;
   var dataObj = new Date(dataHora);
   var dataHoraFormat = Date.parse(dataObj);
+  var detalhesProva = $("#detalhesProva").val();
   var dadosProva = {
-    "data": dataHoraFormat
+    "data": dataHoraFormat,
+    "detalhes": detalhesProva
   }
   database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/provas/').push(dadosProva);
   $("#novaProvaForm")[0].reset();
@@ -242,8 +246,10 @@ var salvarTrabalho = function (a) {
   var dataObj = new Date(dataHora);
   //Converte a string de data para timestamp em milissegundo
   var dataHoraFormat = Date.parse(dataObj);
+  var detalhesTrabalho = $("#detalhesTrabalho").val();
   var dadosTrabalho = {
-    "data": dataHoraFormat
+    "data": dataHoraFormat,
+    "detalhes": detalhesTrabalho
   }
   database.child('users/' + usuario.uid + '/disciplinas/' + chaveDisciplina + '/trabalhos/').push(dadosTrabalho);
   $("#novoTrabalhoForm")[0].reset();
@@ -302,3 +308,26 @@ function logout_user() {
 }
 $('#logout').on('click', logout_user);
 
+
+//Limpa os formulário de adicionar prova e tarefas caso eles sejam fechados
+$('#addProva').on('hidden.bs.modal', function(e) {
+  $(this).find('#novaProvaForm')[0].reset();
+  $('.contCaracterProva').html("");
+});
+$('#addTrabalho').on('hidden.bs.modal', function(e) {
+  $(this).find('#novoTrabalhoForm')[0].reset();
+  $('.contCaracterTrab').html("");
+});
+
+//Contador de caracteres para o campo de detalhes de provas e tarefas
+$('textarea').on("input", function(){
+  var maxlength = $(this).attr("maxlength");
+  console.log(this);
+  var currentLength = $(this).val().length;
+  if (this.id == 'detalhesProva') {
+    $('.contCaracterProva').html(maxlength - currentLength + " caracteres restantes");
+  }
+  else if (this.id == 'detalhesTrabalho') {
+    $('.contCaracterTrab').html(maxlength - currentLength + " caracteres restantes");
+  }
+});

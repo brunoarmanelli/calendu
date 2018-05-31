@@ -160,7 +160,7 @@
                   <h6><br>Provas</h6>
                   {{#if provas}}
                   {{#eachSort provas}}
-                    <li class="card-text">{{data}}</li>
+                    <li class="card-text">{{data}} - {{detalhes}}</li>
                   {{/eachSort}}
                   {{else}}
                   <li>Nenhuma prova cadastrada</li>
@@ -169,7 +169,7 @@
                   <h6>Tarefas</h6>
                   {{#if trabalhos}}
                   {{#eachSort trabalhos}}
-                    <li class="card-text">{{data}}</li>
+                    <li class="card-text">{{data}} - {{detalhes}}</li>
                   {{/eachSort}}
                   {{else}}
                   <li>Nenhuma tarefa cadastrada</li>
@@ -204,19 +204,19 @@
                 <div class="form-group">
                   <label for="diaSemana">Dias da Semana</label>
                   <div class="weekDays-selector">
-                    <input type="checkbox" id="weekday-mon" class="weekday" name="Segunda"/>
+                    <input type="checkbox" id="weekday-mon" class="weekday" name="Segunda" />
                     <label for="weekday-mon">Seg</label>
-                    <input type="checkbox" id="weekday-tue" class="weekday" name="Terça"/>
+                    <input type="checkbox" id="weekday-tue" class="weekday" name="Terça" />
                     <label for="weekday-tue">Ter</label>
-                    <input type="checkbox" id="weekday-wed" class="weekday" name="Quarta"/>
+                    <input type="checkbox" id="weekday-wed" class="weekday" name="Quarta" />
                     <label for="weekday-wed">Qua</label>
-                    <input type="checkbox" id="weekday-thu" class="weekday" name="Quinta"/>
+                    <input type="checkbox" id="weekday-thu" class="weekday" name="Quinta" />
                     <label for="weekday-thu">Qui</label>
-                    <input type="checkbox" id="weekday-fri" class="weekday" name="Sexta"/>
+                    <input type="checkbox" id="weekday-fri" class="weekday" name="Sexta" />
                     <label for="weekday-fri">Sex</label>
-                    <input type="checkbox" id="weekday-sat" class="weekday" name="Sábado"/>
+                    <input type="checkbox" id="weekday-sat" class="weekday" name="Sábado" />
                     <label for="weekday-sat">Sáb</label>
-                    <input type="checkbox" id="weekday-sun" class="weekday" name="Domingo"/>
+                    <input type="checkbox" id="weekday-sun" class="weekday" name="Domingo" />
                     <label for="weekday-sun">Dom</label>
                   </div>
                 </div>
@@ -250,6 +250,11 @@
                   <label for="horaProva">Horário</label>
                   <input type="time" class="form-control" id="horaProva" placeholder="Horário da Prova" required>
                 </div>
+                <div class="form-group">
+                  <label for="detalhesProva">Detalhes</label>
+                  <textarea class="form-control" id="detalhesProva" placeholder="Detalhes da Prova" maxlength="140" rows="2" required></textarea>
+                  <div class="contCaracterProva"></div>
+                </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
               </form>
@@ -277,6 +282,11 @@
                 <div class="form-group">
                   <label for="horaTrabalho">Horário</label>
                   <input type="time" class="form-control" id="horaTrabalho" placeholder="Horário do Trabalho" required>
+                </div>
+                <div class="form-group">
+                  <label for="detalhesTrabalho">Detalhes</label>
+                  <textarea class="form-control" id="detalhesTrabalho" placeholder="Detalhes da Tarefa" maxlength="140" rows="2" required></textarea>
+                  <div class="contCaracterTrab"></div>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
