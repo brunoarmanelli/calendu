@@ -322,12 +322,23 @@ $('#addTrabalho').on('hidden.bs.modal', function(e) {
 //Contador de caracteres para o campo de detalhes de provas e tarefas
 $('textarea').on("input", function(){
   var maxlength = $(this).attr("maxlength");
-  console.log(this);
   var currentLength = $(this).val().length;
+  var caracterRestante = maxlength - currentLength;
   if (this.id == 'detalhesProva') {
-    $('.contCaracterProva').html(maxlength - currentLength + " caracteres restantes");
+    if (caracterRestante > 1) {
+      $('.contCaracterProva').html(caracterRestante + " caracteres restantes");
+    }
+    else {
+      $('.contCaracterProva').html(caracterRestante + " caractere restante");
+    }
   }
   else if (this.id == 'detalhesTrabalho') {
-    $('.contCaracterTrab').html(maxlength - currentLength + " caracteres restantes");
+    if (caracterRestante > 1) {
+      $('.contCaracterTrab').html(caracterRestante + " caracteres restantes");  
+    }
+    else {
+      $('.contCaracterTrab').html(caracterRestante + " caractere restante");
+    }
   }
+
 });
