@@ -57,3 +57,7 @@ body#page-top{
 .card-header:first-child:hover {
   background-color: rgba(0,0,0,.09);
 }
+
+.dadosCalendario {
+  margin-bottom: 10px;
+}

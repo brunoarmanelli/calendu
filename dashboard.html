@@ -64,7 +64,7 @@
                               <i class="fa fa-edit"></i>
                             </div>
                             <div class="mr-5">Provas 
-                              <a id="adicionar-prova" href="#" style="color: white" data-toggle="modal" data-target="#addProva" data-key="{{@key}}">
+                              <a id="adicionar-prova" href="#" style="color: white" data-toggle="modal" data-target="#addProva" data-key="{{@key}}" data-materia="{{nome}}">
                                 <i class="fa fa-plus-square"></i>
                               </a>
                             </div>
@@ -77,7 +77,7 @@
                                     <li>{{data}}</li>
                                   </div>
                                   <div class="col-sm-2">
-                                    <a id="remover-prova" href="#" style="color: white" data-key="{{chave}}">
+                                    <a id="remover-prova" href="#" style="color: white" data-key="{{chave}}" data-materia="{{../nome}}" data-chave-lista="{{chaveLista}}">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                   </div>
@@ -97,7 +97,7 @@
                               <i class="fa fa-fw fa-list"></i>
                             </div>
                             <div class="mr-5">Tarefas
-                            <a id="adicionar-trabalho" href="#" style="color: white" data-toggle="modal" data-target="#addTrabalho" data-key="{{@key}}">
+                            <a id="adicionar-trabalho" href="#" style="color: white" data-toggle="modal" data-target="#addTrabalho" data-key="{{@key}}" data-materia="{{nome}}">
                               <i class="fa fa-plus-square"></i>
                             </a>
                           </div>
@@ -110,7 +110,7 @@
                                   <li>{{data}}</li>
                                 </div>
                                 <div class="col-sm-2">
-                                  <a id="remover-trabalho" href="#" style="color: white" data-key="{{chave}}">
+                                  <a id="remover-trabalho" href="#" style="color: white" data-key="{{chave}}" data-materia="{{../nome}}" data-chave-lista="{{chaveLista}}">
                                       <i class="fa fa-trash-o"></i>
                                   </a>
                                 </div>
@@ -151,33 +151,17 @@
             </div>
             <div class="card-body" id="container-calendario">
               <script id="template-calendario" type="text/x-handlebars-template">
-                {{#if disciplinas}}
-                {{#each disciplinas}}
-                  <h5>{{nome}}</h5>
-                  {{#each dias}}
-                    &bull;&nbsp;{{this.dia}}: {{this.inicio}} às {{this.fim}}
-                  {{/each}}
-                  <h6><br>Provas</h6>
-                  {{#if provas}}
-                  {{#eachSort provas}}
-                    <li class="card-text">{{data}} - {{detalhes}}</li>
-                  {{/eachSort}}
-                  {{else}}
-                  <li>Nenhuma prova cadastrada</li>
-                  {{/if}}
-                  <br>
-                  <h6>Tarefas</h6>
-                  {{#if trabalhos}}
-                  {{#eachSort trabalhos}}
-                    <li class="card-text">{{data}} - {{detalhes}}</li>
-                  {{/eachSort}}
-                  {{else}}
-                  <li>Nenhuma tarefa cadastrada</li>
-                  {{/if}}
-                  <br>
-                {{/each}}
+                {{#if deveres}}
+                  {{#eachSortGroup deveres}}
+                  <div class="dadosCalendario">
+                    <h5>{{key}}</h5>
+                    {{#each value}}
+                      {{hora}} - {{tipo}} de {{materia}}: {{detalhes}}<br>
+                    {{/each}}
+                  </div>
+                  {{/eachSortGroup}}
                 {{else}}
-                <li>Nenhuma disciplina cadastrada</li>
+                <li>Nenhuma prova ou tarefa cadastrada.</li>
                 {{/if}}
               </script>
             </div>
@@ -301,6 +285,7 @@
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/2.7.0/firebase-ui-auth__pt.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/underscore-min.js"></script>
     <script src="js/handlebars-v4.0.11.js"></script>
     <script src="js/scripts.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

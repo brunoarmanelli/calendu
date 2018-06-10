@@ -1,0 +1,120 @@
+{{#each disciplinas}}
+                  <h5>{{nome}}</h5>
+                  {{#each dias}}
+                    &bull;&nbsp;{{this.dia}}: {{this.inicio}} às {{this.fim}}
+                  {{/each}}
+                  <h6><br>Provas</h6>
+                  {{#if provas}}
+                  {{#eachSort provas}}
+                    <li class="card-text">{{data}} - {{detalhes}}</li>
+                  {{/eachSort}}
+                  {{else}}
+                  <li>Nenhuma prova cadastrada</li>
+                  {{/if}}
+                  <br>
+                  <h6>Tarefas</h6>
+                  {{#if trabalhos}}
+                  {{#eachSort trabalhos}}
+                    <li class="card-text">{{data}} - {{detalhes}}</li>
+                  {{/eachSort}}
+                  {{else}}
+                  <li>Nenhuma tarefa cadastrada</li>
+                  {{/if}}
+                  <br>
+                {{/each}}
+
+
+
+
+
+
+
+
+
+<!--TESTE 2 abaixo-->
+
+
+
+<!--Calendário-->
+<div class="col-sm-12 col-md-4" id="calendar">
+    <div class="card bg-light mb-3">
+      <div class="card-header">
+        <h2 class="card-title">Calendário</h2>
+      </div>
+      <div class="card-body" id="container-calendario">
+        <script id="template-calendario" type="text/x-handlebars-template">
+          {{#if disciplinas}}
+          <h5>Segunda-Feira</h5>
+          <h6>Aulas</h6>
+            {{#each disciplinas}}
+              {{#each dias}}
+                {{#compare this.dia "Segunda"}}
+                  {{../nome}} - {{this.inicio}} às {{this.fim}}<br>
+                {{/compare}}
+              {{/each}}
+            {{/each}}
+          <h6>Provas</h6>
+          {{#each disciplinas}}
+              {{#eachSort provas}}
+                {{#compare this.diaSemana "Segunda"}}
+                  {{../nome}} - <li class="card-text">{{data}} - {{detalhes}}</li><br>
+                {{/compare}}
+              {{/eachSort}}
+            {{/each}}
+          <h6>Trabalhos</h6>
+          <h5>Terça-Feira</h5>
+          {{#each disciplinas}}
+              {{#each dias}}
+                {{#compare this.dia "Terça"}}
+                  {{../nome}} - {{this.inicio}} às {{this.fim}}
+                {{/compare}}
+              {{/each}}
+            {{/each}}
+          <h5>Quarta-Feira</h5>
+          {{#each disciplinas}}
+              {{#each dias}}
+                {{#compare this.dia "Quarta"}}
+                  {{../nome}} - {{this.inicio}} às {{this.fim}}
+                {{/compare}}
+              {{/each}}
+            {{/each}}
+          <h5>Quinta-Feira</h5>
+          {{#each disciplinas}}
+              {{#each dias}}
+                {{#compare this.dia "Quinta"}}
+                  {{../nome}} - {{this.inicio}} às {{this.fim}}
+                {{/compare}}
+              {{/each}}
+            {{/each}}
+          <h5>Sexta-Feira</h5>
+          {{#each disciplinas}}
+              {{#each dias}}
+                {{#compare this.dia "Sexta"}}
+                  {{../nome}} - {{this.inicio}} às {{this.fim}}
+                {{/compare}}
+              {{/each}}
+            {{/each}}
+          <h5>Sábado</h5>
+          {{#each disciplinas}}
+              {{#each dias}}
+                {{#compare this.dia "Sábado"}}
+                  {{../nome}} - {{this.inicio}} às {{this.fim}}
+                {{/compare}}
+              {{/each}}
+            {{/each}}
+          <h5>Domingo</h5>
+          {{#each disciplinas}}
+              {{#each dias}}
+                {{#compare this.dia "Domingo"}}
+                  {{../nome}} - {{this.inicio}} às {{this.fim}}
+                {{/compare}}
+              {{/each}}
+            {{/each}}
+          {{else}}
+          <li>Nenhuma disciplina cadastrada</li>
+          {{/if}}
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
