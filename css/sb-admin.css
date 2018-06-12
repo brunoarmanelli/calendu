@@ -240,13 +240,26 @@ button.btn.btn-primary {
 
 
 .card-header .btn-link{
-      color: #f8f9fa;
+    color: #f8f9fa;
     text-decoration: none;
     background-color: transparent;
     border-color: transparent;
-    font-size: 27px;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 601px) {
+  .card-header .btn-link {
+    font-size: 27px;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  .card-header .btn-link {
+    font-size: 12px;
+  }
 }
 
 .card-header:first-child:hover {
