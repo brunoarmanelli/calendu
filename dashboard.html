@@ -39,7 +39,7 @@
   <div class="conteudo-body">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-8" id="accordion">
+        <div class="col-sm-12 col-md-12 col-lg-6" id="accordion">
           <!-- Template -->
           <script id="template" type="text/x-handlebars-template">
             {{#if disciplinas}}
@@ -144,7 +144,7 @@
         </div>
 
         <!--Calendário-->
-        <div class="col-sm-12 col-md-12 col-lg-4" id="calendar">
+        <div class="col-sm-12 col-md-12 col-lg-3" id="calendar">
           <div class="card bg-light mb-3">
             <div class="card-header">
               <h2 class="card-title">Calendário</h2>
@@ -164,6 +164,92 @@
                 <li>Nenhuma prova ou tarefa cadastrada.</li>
                 {{/if}}
               </script>
+            </div>
+          </div>
+        </div>
+        <!--Calendário Semana-->
+      <div class="col-sm-12 col-md-12 col-lg-3" id="calendar">
+          <div class="card bg-light mb-3">
+            <div class="card-header">
+              <h2 class="card-title">Semana</h2>
+            </div>
+            <div class="card-body" id="container-calendario2">
+              <script id="template-calendario2" type="text/x-handlebars-template">
+                  {{#if disciplinas}}
+                    <div class="diaSemanaCalendario">
+                      <h5>Segunda-Feira</h5>
+                      {{#eachSortGroupSemana disciplinas}}
+                        {{#compare key "Segunda" operator="=="}}
+                        {{#each value}}
+                          {{nome}} - {{inicio}} às {{fim}}<br>
+                        {{/each}}
+                        {{/compare}}
+                      {{/eachSortGroupSemana}}
+                    </div>
+                    <div class="diaSemanaCalendario">
+                      <h5>Terça-Feira</h5>
+                      {{#eachSortGroupSemana disciplinas}}
+                        {{#compare key "Terça" operator="=="}}
+                        {{#each value}}
+                          {{nome}} - {{inicio}} às {{fim}}<br>
+                        {{/each}}
+                        {{/compare}}
+                      {{/eachSortGroupSemana}}
+                    </div>
+                    <div class="diaSemanaCalendario">
+                      <h5>Quarta-Feira</h5>
+                      {{#eachSortGroupSemana disciplinas}}
+                        {{#compare key "Quarta" operator="=="}}
+                        {{#each value}}
+                          {{nome}} - {{inicio}} às {{fim}}<br>
+                        {{/each}}
+                        {{/compare}}
+                      {{/eachSortGroupSemana}}
+                    </div>
+                    <div class="diaSemanaCalendario">
+                      <h5>Quinta-Feira</h5>
+                      {{#eachSortGroupSemana disciplinas}}
+                        {{#compare key "Quinta" operator="=="}}
+                        {{#each value}}
+                          {{nome}} - {{inicio}} às {{fim}}<br>
+                        {{/each}}
+                        {{/compare}}
+                      {{/eachSortGroupSemana}}
+                    </div>
+                    <div class="diaSemanaCalendario">
+                      <h5>Sexta-Feira</h5>
+                      {{#eachSortGroupSemana disciplinas}}
+                        {{#compare key "Sexta" operator="=="}}
+                        {{#each value}}
+                          {{nome}} - {{inicio}} às {{fim}}<br>
+                        {{/each}}
+                        {{/compare}}
+                      {{/eachSortGroupSemana}}
+                    </div>
+                    <div class="diaSemanaCalendario">
+                      <h5>Sábado</h5>
+                      {{#eachSortGroupSemana disciplinas}}
+                        {{#compare key "Sábado" operator="=="}}
+                        {{#each value}}
+                          {{nome}} - {{inicio}} às {{fim}}<br>
+                        {{/each}}
+                        {{/compare}}
+                      {{/eachSortGroupSemana}}
+                    </div>
+                    <div class="diaSemanaCalendario">
+                      <h5>Domingo</h5>
+                      {{#eachSortGroupSemana disciplinas}}
+                        {{#compare key "Domingo" operator="=="}}
+                        {{#each value}}
+                          {{nome}} - {{inicio}} às {{fim}}<br>
+                        {{/each}}
+                        {{/compare}}
+                      {{/eachSortGroupSemana}}
+                    </div>
+                  {{else}}
+                  <li>Nenhuma disciplina cadastrada.</li>
+                  {{/if}}
+                </script>
             </div>
           </div>
         </div>

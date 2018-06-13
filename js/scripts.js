@@ -105,6 +105,42 @@ Handlebars.registerHelper('eachSortGroup', function (obj, options) {
   return result;
 });
 
+Handlebars.registerHelper('eachSortGroupSemana', function (obj, options) {
+  var dados = [];
+  var result = '';
+  var horaMin;
+  var ms;
+  //Itera sobre o objeto contendo os dados de cada prova e cria um vetor com esses dados.
+  for (var key in obj) {
+    for (var idx in obj[key].dias) {
+      horaMin = obj[key].dias[idx].inicio.split(":");
+      ms = (parseInt(horaMin[0]) * 3.6e6) + (parseInt(horaMin[1]) * 60000);
+      dados.push({
+        'diaSemana': obj[key].dias[idx].dia,
+        'nome': obj[key].nome, 
+        'inicio': obj[key].dias[idx].inicio, 
+        'fim': obj[key].dias[idx].fim,
+        'ms': ms
+      });
+    }
+  }
+  console.log(dados);
+
+  var groups = _.groupBy(dados, 'diaSemana');
+  console.log(groups);
+  for (var keyGroup in groups) {
+    if (groups.hasOwnProperty(keyGroup)) {
+      groups[keyGroup].sort(function (a, b) {
+        return a.ms - b.ms;
+      });
+      result += options.fn({ key: keyGroup, value: groups[keyGroup] });
+    }
+  }
+  console.log(groups);
+  return result;
+});
+
+
 
 Handlebars.registerHelper('compare', function (lvalue, rvalue, options) {
 
@@ -143,14 +179,17 @@ firebase.auth().onAuthStateChanged(function (user) {
     var uid = user.uid;
     var boxTemplate = $("#template").html();
     var calenTemplate = $("#template-calendario").html();
+    var calenTemplate2 = $("#template-calendario2").html();
     var compiledBoxTemplate = Handlebars.compile(boxTemplate);
     var compiledCalenTemplate = Handlebars.compile(calenTemplate);
+    var compiledCalenTemplate2 = Handlebars.compile(calenTemplate2);
     var dbRef = firebase.database().ref().child('users/' + uid + '/');
     dbRef.on('value', function (snap) {
       //Se existir dados para o usuario no banco de dados, gera o template.
       if (snap.val()) {
         $("#accordion").html(compiledBoxTemplate(snap.val()));
         $('#container-calendario').html(compiledCalenTemplate(snap.val()));
+        $('#container-calendario2').html(compiledCalenTemplate2(snap.val()));
       }
       //Caso contrário, cria uma entrada para o usuário no banco de dados.
       else {
