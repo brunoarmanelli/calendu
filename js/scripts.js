@@ -124,10 +124,8 @@ Handlebars.registerHelper('eachSortGroupSemana', function (obj, options) {
       });
     }
   }
-  console.log(dados);
 
   var groups = _.groupBy(dados, 'diaSemana');
-  console.log(groups);
   for (var keyGroup in groups) {
     if (groups.hasOwnProperty(keyGroup)) {
       groups[keyGroup].sort(function (a, b) {
@@ -136,7 +134,6 @@ Handlebars.registerHelper('eachSortGroupSemana', function (obj, options) {
       result += options.fn({ key: keyGroup, value: groups[keyGroup] });
     }
   }
-  console.log(groups);
   return result;
 });
 
