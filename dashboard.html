@@ -144,116 +144,119 @@
         </div>
 
         <!--Calendário-->
-        <div class="col-sm-12 col-md-12 col-lg-3" id="calendar">
+        <div class="col-sm-12 col-md-12 col-lg-4" id="calendar">
           <div class="card bg-light mb-3">
             <div class="card-header">
               <h2 class="card-title">Calendário</h2>
             </div>
             <div class="card-body" id="container-calendario">
-              <script id="template-calendario" type="text/x-handlebars-template">
-                {{#if deveres}}
-                  {{#eachSortGroup deveres}}
-                  <div class="dadosCalendario">
-                    <h5>{{key}}</h5>
-                    {{#each value}}
-                      {{hora}} - {{tipo}} de {{materia}}: {{detalhes}}<br>
-                    {{/each}}
+                <ul class="nav nav-pills nav-justified">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#agendamentos">Agendamentos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#disciplinas">Disciplinas</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+                  <div class="tab-pane container active" id="agendamentos">
+                      <script id="template-calendario" type="text/x-handlebars-template">
+                        {{#if deveres}}
+                          {{#eachSortGroup deveres}}
+                          <div class="dadosCalendario">
+                            <h5>{{key}}</h5>
+                            {{#each value}}
+                              {{hora}} - {{tipo}} de {{materia}}: {{detalhes}}<br>
+                            {{/each}}
+                          </div>
+                          {{/eachSortGroup}}
+                        {{else}}
+                        <li>Nenhuma prova ou tarefa cadastrada.</li>
+                        {{/if}}
+                      </script>
                   </div>
-                  {{/eachSortGroup}}
-                {{else}}
-                <li>Nenhuma prova ou tarefa cadastrada.</li>
-                {{/if}}
-              </script>
+                  <div class="tab-pane container fade" id="disciplinas"><script id="template-calendario2" type="text/x-handlebars-template">
+                    {{#if disciplinas}}
+                      <div class="diaSemanaCalendario">
+                        <h5>Segunda-Feira</h5>
+                        {{#eachSortGroupSemana disciplinas}}
+                          {{#compare key "Segunda" operator="=="}}
+                          {{#each value}}
+                            {{nome}} - {{inicio}} às {{fim}}<br>
+                          {{/each}}
+                          {{/compare}}
+                        {{/eachSortGroupSemana}}
+                      </div>
+                      <div class="diaSemanaCalendario">
+                        <h5>Terça-Feira</h5>
+                        {{#eachSortGroupSemana disciplinas}}
+                          {{#compare key "Terça" operator="=="}}
+                          {{#each value}}
+                            {{nome}} - {{inicio}} às {{fim}}<br>
+                          {{/each}}
+                          {{/compare}}
+                        {{/eachSortGroupSemana}}
+                      </div>
+                      <div class="diaSemanaCalendario">
+                        <h5>Quarta-Feira</h5>
+                        {{#eachSortGroupSemana disciplinas}}
+                          {{#compare key "Quarta" operator="=="}}
+                          {{#each value}}
+                            {{nome}} - {{inicio}} às {{fim}}<br>
+                          {{/each}}
+                          {{/compare}}
+                        {{/eachSortGroupSemana}}
+                      </div>
+                      <div class="diaSemanaCalendario">
+                        <h5>Quinta-Feira</h5>
+                        {{#eachSortGroupSemana disciplinas}}
+                          {{#compare key "Quinta" operator="=="}}
+                          {{#each value}}
+                            {{nome}} - {{inicio}} às {{fim}}<br>
+                          {{/each}}
+                          {{/compare}}
+                        {{/eachSortGroupSemana}}
+                      </div>
+                      <div class="diaSemanaCalendario">
+                        <h5>Sexta-Feira</h5>
+                        {{#eachSortGroupSemana disciplinas}}
+                          {{#compare key "Sexta" operator="=="}}
+                          {{#each value}}
+                            {{nome}} - {{inicio}} às {{fim}}<br>
+                          {{/each}}
+                          {{/compare}}
+                        {{/eachSortGroupSemana}}
+                      </div>
+                      <div class="diaSemanaCalendario">
+                        <h5>Sábado</h5>
+                        {{#eachSortGroupSemana disciplinas}}
+                          {{#compare key "Sábado" operator="=="}}
+                          {{#each value}}
+                            {{nome}} - {{inicio}} às {{fim}}<br>
+                          {{/each}}
+                          {{/compare}}
+                        {{/eachSortGroupSemana}}
+                      </div>
+                      <div class="diaSemanaCalendario">
+                        <h5>Domingo</h5>
+                        {{#eachSortGroupSemana disciplinas}}
+                          {{#compare key "Domingo" operator="=="}}
+                          {{#each value}}
+                            {{nome}} - {{inicio}} às {{fim}}<br>
+                          {{/each}}
+                          {{/compare}}
+                        {{/eachSortGroupSemana}}
+                      </div>
+                    {{else}}
+                    <li>Nenhuma disciplina cadastrada.</li>
+                    {{/if}}
+                  </script>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <!--Calendário Semana-->
-      <div class="col-sm-12 col-md-12 col-lg-3" id="calendar">
-          <div class="card mb-3" style="background-color: #d9f1f9">
-            <div class="card-header">
-              <h2 class="card-title">Semana</h2>
-            </div>
-            <div class="card-body" id="container-calendario2">
-              <script id="template-calendario2" type="text/x-handlebars-template">
-                  {{#if disciplinas}}
-                    <div class="diaSemanaCalendario">
-                      <h5>Segunda-Feira</h5>
-                      {{#eachSortGroupSemana disciplinas}}
-                        {{#compare key "Segunda" operator="=="}}
-                        {{#each value}}
-                          {{nome}} - {{inicio}} às {{fim}}<br>
-                        {{/each}}
-                        {{/compare}}
-                      {{/eachSortGroupSemana}}
-                    </div>
-                    <div class="diaSemanaCalendario">
-                      <h5>Terça-Feira</h5>
-                      {{#eachSortGroupSemana disciplinas}}
-                        {{#compare key "Terça" operator="=="}}
-                        {{#each value}}
-                          {{nome}} - {{inicio}} às {{fim}}<br>
-                        {{/each}}
-                        {{/compare}}
-                      {{/eachSortGroupSemana}}
-                    </div>
-                    <div class="diaSemanaCalendario">
-                      <h5>Quarta-Feira</h5>
-                      {{#eachSortGroupSemana disciplinas}}
-                        {{#compare key "Quarta" operator="=="}}
-                        {{#each value}}
-                          {{nome}} - {{inicio}} às {{fim}}<br>
-                        {{/each}}
-                        {{/compare}}
-                      {{/eachSortGroupSemana}}
-                    </div>
-                    <div class="diaSemanaCalendario">
-                      <h5>Quinta-Feira</h5>
-                      {{#eachSortGroupSemana disciplinas}}
-                        {{#compare key "Quinta" operator="=="}}
-                        {{#each value}}
-                          {{nome}} - {{inicio}} às {{fim}}<br>
-                        {{/each}}
-                        {{/compare}}
-                      {{/eachSortGroupSemana}}
-                    </div>
-                    <div class="diaSemanaCalendario">
-                      <h5>Sexta-Feira</h5>
-                      {{#eachSortGroupSemana disciplinas}}
-                        {{#compare key "Sexta" operator="=="}}
-                        {{#each value}}
-                          {{nome}} - {{inicio}} às {{fim}}<br>
-                        {{/each}}
-                        {{/compare}}
-                      {{/eachSortGroupSemana}}
-                    </div>
-                    <div class="diaSemanaCalendario">
-                      <h5>Sábado</h5>
-                      {{#eachSortGroupSemana disciplinas}}
-                        {{#compare key "Sábado" operator="=="}}
-                        {{#each value}}
-                          {{nome}} - {{inicio}} às {{fim}}<br>
-                        {{/each}}
-                        {{/compare}}
-                      {{/eachSortGroupSemana}}
-                    </div>
-                    <div class="diaSemanaCalendario">
-                      <h5>Domingo</h5>
-                      {{#eachSortGroupSemana disciplinas}}
-                        {{#compare key "Domingo" operator="=="}}
-                        {{#each value}}
-                          {{nome}} - {{inicio}} às {{fim}}<br>
-                        {{/each}}
-                        {{/compare}}
-                      {{/eachSortGroupSemana}}
-                    </div>
-                  {{else}}
-                  <li>Nenhuma disciplina cadastrada.</li>
-                  {{/if}}
-                </script>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Modal Adicionar Disciplina -->
       <div class="modal" id="addDisc" tabindex="-1" role="dialog">
