@@ -40,6 +40,10 @@ Handlebars.registerHelper('eachSort', function (obj, options) {
     var opcoes = { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     var dataLocal = dataStr.toLocaleString('pt-BR', opcoes);
     dados[i].data = dataLocal;
+    dados[i].stamp = miliseg;
+    var agora = new Date();
+    var agora = Date.parse(agora);
+    dados[i].agora = agora;
     result += options.fn(dados[i]);
   }
   return result;
@@ -550,3 +554,25 @@ $('textarea').on("input", function () {
   }
 
 });
+
+var getDetalhesProva = function() {
+  var usuario = firebase.auth().currentUser;
+  var keyProva = $(this).data('key');
+  var keyDisc = $(this).closest('#footer-prova').data('key');
+  var detalhesRef = firebase.database().ref().child('users/' + usuario.uid + '/disciplinas/' + keyDisc + '/provas/' + keyProva + '/detalhes');
+  detalhesRef.on('value', function (snaps) {
+    $('#detalhesEvento').html(snaps.val());
+  });
+};
+$(document).on('click', '.buscarDetalhesProva', getDetalhesProva);
+
+var getDetalhesTarefa = function() {
+  var usuario = firebase.auth().currentUser;
+  var keyTarefa = $(this).data('key');
+  var keyDisc = $(this).closest('#footer-trabalho').data('key');
+  var detalhesRef = firebase.database().ref().child('users/' + usuario.uid + '/disciplinas/' + keyDisc + '/trabalhos/' + keyTarefa + '/detalhes');
+  detalhesRef.on('value', function (snaps) {
+    $('#detalhesEvento').html(snaps.val());
+  });
+};
+$(document).on('click', '.buscarDetalhesTarefa', getDetalhesTarefa);

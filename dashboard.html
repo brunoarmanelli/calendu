@@ -39,7 +39,7 @@
   <div class="conteudo-body">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-6" id="accordion">
+        <div class="col-sm-12 col-md-12 col-lg-8" id="accordion">
           <!-- Template -->
           <script id="template" type="text/x-handlebars-template">
             {{#if disciplinas}}
@@ -74,7 +74,11 @@
                               {{#eachSort provas}}
                               <div class="row">
                                   <div class="col-sm-10">
-                                    <li>{{data}}</li>
+                                    {{#compare stamp agora operator=">"}}
+                                    <li class="dataDaAtividade"><a title="Ver Detalhes" href="#" class="buscarDetalhesProva" data-key="{{chave}}" style="color: white" data-toggle="modal" data-target="#verDetalhes">{{data}}</a></li>
+                                    {{^}}
+                                    <li class="dataDaAtividade" style="text-decoration: line-through"><a title="Ver Detalhes" href="#" class="buscarDetalhesProva" data-key="{{chave}}" style="color: white" data-toggle="modal" data-target="#verDetalhes">{{data}}</a></li>
+                                    {{/compare}}
                                   </div>
                                   <div class="col-sm-2">
                                     <a id="remover-prova" href="#" style="color: white" data-key="{{chave}}" data-materia="{{../nome}}" data-chave-lista="{{chaveLista}}">
@@ -107,7 +111,11 @@
                             {{#eachSort trabalhos}}
                             <div class="row">
                                 <div class="col-sm-10">
-                                  <li>{{data}}</li>
+                                    {{#compare stamp agora operator=">"}}
+                                    <li class="dataDaAtividade"><a title="Ver Detalhes" href="#" class="buscarDetalhesTarefa" data-key="{{chave}}" style="color: white" data-toggle="modal" data-target="#verDetalhes">{{data}}</a></li>
+                                    {{^}}
+                                    <li class="dataDaAtividade" style="text-decoration: line-through"><a title="Ver Detalhes" href="#" class="buscarDetalhesTarefa" data-key="{{chave}}" style="color: white" data-toggle="modal" data-target="#verDetalhes">{{data}}</a></li>
+                                    {{/compare}}
                                 </div>
                                 <div class="col-sm-2">
                                   <a id="remover-trabalho" href="#" style="color: white" data-key="{{chave}}" data-materia="{{../nome}}" data-chave-lista="{{chaveLista}}">
@@ -146,117 +154,122 @@
         <!--Calendário-->
         <div class="col-sm-12 col-md-12 col-lg-4" id="calendar">
           <div class="card bg-light mb-3">
-            <div class="card-header">
-              <h2 class="card-title">Calendário</h2>
-            </div>
-            <div class="card-body" id="container-calendario">
-                <ul class="nav nav-pills nav-justified">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#agendamentos">Agendamentos</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#disciplinas">Disciplinas</a>
-                  </li>
-                </ul>
-
-                <div class="tab-content">
-                  <div class="tab-pane container active" id="agendamentos">
-                      <script id="template-calendario" type="text/x-handlebars-template">
-                        {{#if deveres}}
-                          {{#eachSortGroup deveres}}
-                          <div class="dadosCalendario">
-                            <h5>{{key}}</h5>
-                            {{#each value}}
-                              {{hora}} - {{tipo}} de {{materia}}: {{detalhes}}<br>
-                            {{/each}}
-                          </div>
-                          {{/eachSortGroup}}
-                        {{else}}
+              <div class="card-header">
+                  <h2 class="card-title">Calendário</h2>
+                  <ul class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active">
+                        <a class="nav-link active teste" href="#1" aria-controls="1" role="tab" data-toggle="tab" style="background-color: white">Agendamentos</a>
+                      </li>
+                      <li role="presentation">
+                        <a class="nav-link teste" href="#2" aria-controls="2" role="tab" data-toggle="tab" style="background-color: white">Semana</a>
+                      </li>
+                    </ul>
+                </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="1">
+                  <div id="container-calendario">
+                    <script id="template-calendario" type="text/x-handlebars-template">
+                      {{#if deveres}}
+                       {{#eachSortGroup deveres}}
+                        <div class="dadosCalendario">
+                          <h5>{{key}}</h5>
+                          {{#each value}}
+                            {{hora}} - {{tipo}} de {{materia}}: {{detalhes}}<br>
+                          {{/each}}
+                        </div>
+                       {{/eachSortGroup}}
+                      {{else}}
                         <li>Nenhuma prova ou tarefa cadastrada.</li>
-                        {{/if}}
-                      </script>
+                      {{/if}}
+                    </script>
                   </div>
-                  <div class="tab-pane container fade" id="disciplinas"><script id="template-calendario2" type="text/x-handlebars-template">
-                    {{#if disciplinas}}
-                      <div class="diaSemanaCalendario">
-                        <h5>Segunda-Feira</h5>
-                        {{#eachSortGroupSemana disciplinas}}
-                          {{#compare key "Segunda" operator="=="}}
-                          {{#each value}}
-                            {{nome}} - {{inicio}} às {{fim}}<br>
-                          {{/each}}
-                          {{/compare}}
-                        {{/eachSortGroupSemana}}
-                      </div>
-                      <div class="diaSemanaCalendario">
-                        <h5>Terça-Feira</h5>
-                        {{#eachSortGroupSemana disciplinas}}
-                          {{#compare key "Terça" operator="=="}}
-                          {{#each value}}
-                            {{nome}} - {{inicio}} às {{fim}}<br>
-                          {{/each}}
-                          {{/compare}}
-                        {{/eachSortGroupSemana}}
-                      </div>
-                      <div class="diaSemanaCalendario">
-                        <h5>Quarta-Feira</h5>
-                        {{#eachSortGroupSemana disciplinas}}
-                          {{#compare key "Quarta" operator="=="}}
-                          {{#each value}}
-                            {{nome}} - {{inicio}} às {{fim}}<br>
-                          {{/each}}
-                          {{/compare}}
-                        {{/eachSortGroupSemana}}
-                      </div>
-                      <div class="diaSemanaCalendario">
-                        <h5>Quinta-Feira</h5>
-                        {{#eachSortGroupSemana disciplinas}}
-                          {{#compare key "Quinta" operator="=="}}
-                          {{#each value}}
-                            {{nome}} - {{inicio}} às {{fim}}<br>
-                          {{/each}}
-                          {{/compare}}
-                        {{/eachSortGroupSemana}}
-                      </div>
-                      <div class="diaSemanaCalendario">
-                        <h5>Sexta-Feira</h5>
-                        {{#eachSortGroupSemana disciplinas}}
-                          {{#compare key "Sexta" operator="=="}}
-                          {{#each value}}
-                            {{nome}} - {{inicio}} às {{fim}}<br>
-                          {{/each}}
-                          {{/compare}}
-                        {{/eachSortGroupSemana}}
-                      </div>
-                      <div class="diaSemanaCalendario">
-                        <h5>Sábado</h5>
-                        {{#eachSortGroupSemana disciplinas}}
-                          {{#compare key "Sábado" operator="=="}}
-                          {{#each value}}
-                            {{nome}} - {{inicio}} às {{fim}}<br>
-                          {{/each}}
-                          {{/compare}}
-                        {{/eachSortGroupSemana}}
-                      </div>
-                      <div class="diaSemanaCalendario">
-                        <h5>Domingo</h5>
-                        {{#eachSortGroupSemana disciplinas}}
-                          {{#compare key "Domingo" operator="=="}}
-                          {{#each value}}
-                            {{nome}} - {{inicio}} às {{fim}}<br>
-                          {{/each}}
-                          {{/compare}}
-                        {{/eachSortGroupSemana}}
-                      </div>
-                    {{else}}
-                    <li>Nenhuma disciplina cadastrada.</li>
-                    {{/if}}
-                  </script>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="2">
+                  <div id="container-calendario2">
+                    <script id="template-calendario2" type="text/x-handlebars-template">
+                          {{#if disciplinas}}
+                            <div class="diaSemanaCalendario">
+                              <h5>Segunda-Feira</h5>
+                              {{#eachSortGroupSemana disciplinas}}
+                                {{#compare key "Segunda" operator="=="}}
+                                {{#each value}}
+                                  {{nome}} - {{inicio}} às {{fim}}<br>
+                                {{/each}}
+                                {{/compare}}
+                              {{/eachSortGroupSemana}}
+                            </div>
+                            <div class="diaSemanaCalendario">
+                              <h5>Terça-Feira</h5>
+                              {{#eachSortGroupSemana disciplinas}}
+                                {{#compare key "Terça" operator="=="}}
+                                {{#each value}}
+                                  {{nome}} - {{inicio}} às {{fim}}<br>
+                                {{/each}}
+                                {{/compare}}
+                              {{/eachSortGroupSemana}}
+                            </div>
+                            <div class="diaSemanaCalendario">
+                              <h5>Quarta-Feira</h5>
+                              {{#eachSortGroupSemana disciplinas}}
+                                {{#compare key "Quarta" operator="=="}}
+                                {{#each value}}
+                                  {{nome}} - {{inicio}} às {{fim}}<br>
+                                {{/each}}
+                                {{/compare}}
+                              {{/eachSortGroupSemana}}
+                            </div>
+                            <div class="diaSemanaCalendario">
+                              <h5>Quinta-Feira</h5>
+                              {{#eachSortGroupSemana disciplinas}}
+                                {{#compare key "Quinta" operator="=="}}
+                                {{#each value}}
+                                  {{nome}} - {{inicio}} às {{fim}}<br>
+                                {{/each}}
+                                {{/compare}}
+                              {{/eachSortGroupSemana}}
+                            </div>
+                            <div class="diaSemanaCalendario">
+                              <h5>Sexta-Feira</h5>
+                              {{#eachSortGroupSemana disciplinas}}
+                                {{#compare key "Sexta" operator="=="}}
+                                {{#each value}}
+                                  {{nome}} - {{inicio}} às {{fim}}<br>
+                                {{/each}}
+                                {{/compare}}
+                              {{/eachSortGroupSemana}}
+                            </div>
+                            <div class="diaSemanaCalendario">
+                              <h5>Sábado</h5>
+                              {{#eachSortGroupSemana disciplinas}}
+                                {{#compare key "Sábado" operator="=="}}
+                                {{#each value}}
+                                  {{nome}} - {{inicio}} às {{fim}}<br>
+                                {{/each}}
+                                {{/compare}}
+                              {{/eachSortGroupSemana}}
+                            </div>
+                            <div class="diaSemanaCalendario">
+                              <h5>Domingo</h5>
+                              {{#eachSortGroupSemana disciplinas}}
+                                {{#compare key "Domingo" operator="=="}}
+                                {{#each value}}
+                                  {{nome}} - {{inicio}} às {{fim}}<br>
+                                {{/each}}
+                                {{/compare}}
+                              {{/eachSortGroupSemana}}
+                            </div>
+                          {{else}}
+                          <li>Nenhuma disciplina cadastrada.</li>
+                          {{/if}}
+                        </script>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
       <!-- Modal Adicionar Disciplina -->
       <div class="modal" id="addDisc" tabindex="-1" role="dialog">
@@ -368,6 +381,26 @@
           </div>
         </div>
       </div>
+
+      <div class="modal" id="verDetalhes" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Detalhes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div id="detalhesEvento">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
     </div>
     <!-- /.container-fluid-->
 
@@ -379,7 +412,6 @@
     <script src="js/scripts.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/funcoes.js"></script>
 
   </div>
 </body>

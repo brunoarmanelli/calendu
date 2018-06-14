@@ -65,3 +65,8 @@ body#page-top{
 .diaSemanaCalendario {
   margin-bottom: 10px;
 }
+
+.teste:hover {
+  color: black !important;
+  background-color: #4286f4 !important;
+}
